@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { CountUpValue } from "@/components/ui/CountUpValue";
 
 interface Stat {
   label: string;
@@ -51,8 +52,8 @@ export function StatsBar({ stats, className }: StatsBarProps) {
 
               {/* Value + unit */}
               <div className="flex items-baseline gap-0.5">
-                <span className="font-sans text-3xl font-black leading-none tracking-tight text-white sm:text-4xl">
-                  {stat.value}
+                <span className="font-sans text-3xl font-black leading-none tracking-tight tabular-nums text-white sm:text-4xl">
+                  <CountUpValue value={stat.value} inView={inView} delay={i * 0.08} />
                 </span>
                 {stat.unit && (
                   <span className="font-sans text-lg font-bold text-primary sm:text-xl">
