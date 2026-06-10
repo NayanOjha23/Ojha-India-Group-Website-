@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Ojha Group — Architects of Reliability",
     description:
-      "A multi-disciplinary conglomerate shaping the future of Warehousing, Managed Spaces, Real Estate, and Electronics since 1994.",
+      "A multi-disciplinary conglomerate shaping the future of Warehousing, Managed Spaces, Real Estate, and Electronics since 1993.",
     images: [{ url: "/og/home.jpg", width: 1200, height: 630 }],
   },
 };
