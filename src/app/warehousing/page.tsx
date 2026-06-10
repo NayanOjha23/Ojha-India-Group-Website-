@@ -113,7 +113,7 @@ export default function WarehousingPage() {
         subtext="30+ years of operational excellence in Grade-A warehousing, multi-modal connectivity, and specialised storage solutions."
         primaryBtn={{ label: "View Facilities",    href: "/warehousing#solutions" }}
         ghostBtn={{ label: "Download Brochure",    href: "/warehousing/brochure" }}
-        backgroundImage="https://picsum.photos/seed/warehero/1600/900"
+        backgroundImage="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
       />
 
       {/* 2 — Standardized Framework text block */}
@@ -161,7 +161,7 @@ export default function WarehousingPage() {
             subtitle="Strategic infrastructure hubs spanning the subcontinent, connected by a unified tech-integrated stack."
             className="mb-10"
           />
-          <MapVisualization />
+          <MapVisualization industries={["Warehousing"]} />
         </div>
       </FadeInSection>
 

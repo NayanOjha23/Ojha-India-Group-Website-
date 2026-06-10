@@ -11,19 +11,57 @@ import {
 } from "react-simple-maps";
 import { cn } from "@/lib/utils";
 import {
-  MAP_COMPANIES,
+  MAP_LOCATIONS,
+  SUB_COMPANIES,
   INDUSTRY_COLORS,
-  type MapCompany,
+  type MapLocation,
+  type SubCompany,
 } from "@/lib/constants";
 
 const GEO_URL = "/india-states.json";
 
-const INDUSTRIES = [
-  "Warehousing",
-  "Charter Spaces",
-  "Real Estate",
-  "Electronics",
-] as const;
+const INDUSTRIES = SUB_COMPANIES.map((c) => c.industry);
+
+function companyFor(location: MapLocation): SubCompany {
+  return SUB_COMPANIES.find((c) => c.id === location.companyId)!;
+}
+
+// ─── Filter legend ───────────────────────────────────────────────────────────
+
+function FilterLegend({
+  activeFilters,
+  onToggle,
+}: {
+  activeFilters: Set<SubCompany["industry"]>;
+  onToggle: (industry: SubCompany["industry"]) => void;
+}) {
+  return (
+    <div className="flex flex-wrap gap-x-4 gap-y-2">
+      {INDUSTRIES.map((ind) => {
+        const isActive = activeFilters.size === 0 || activeFilters.has(ind);
+        return (
+          <button
+            key={ind}
+            type="button"
+            onClick={() => onToggle(ind)}
+            className={cn(
+              "flex items-center gap-1.5 rounded-sm border px-2 py-1 transition-colors",
+              isActive
+                ? "border-white/[0.10] bg-white/[0.04]"
+                : "border-white/[0.04] opacity-40 hover:opacity-70"
+            )}
+          >
+            <span
+              className="h-2 w-2 shrink-0 rounded-full"
+              style={{ backgroundColor: INDUSTRY_COLORS[ind] }}
+            />
+            <span className="font-sans text-[10px] text-muted">{ind}</span>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
 
 // ─── Sidebar ─────────────────────────────────────────────────────────────────
 
@@ -40,25 +78,26 @@ function SidebarEmpty() {
         </span>
       </div>
       <p className="font-sans text-[13px] leading-relaxed text-muted">
-        Select a location on the map<br />to view details
+        Select a location on the map<br />to find the right company
       </p>
     </div>
   );
 }
 
 function SidebarActive({
-  company,
+  location,
   onDeselect,
 }: {
-  company: MapCompany;
+  location: MapLocation;
   onDeselect: () => void;
 }) {
   const router = useRouter();
+  const company = companyFor(location);
   const color = INDUSTRY_COLORS[company.industry];
 
   return (
     <motion.div
-      key={company.id}
+      key={location.id}
       initial={{ opacity: 0, x: 10 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.25, ease: "easeOut" }}
@@ -70,13 +109,20 @@ function SidebarActive({
           className="inline-flex w-fit rounded-sm border px-2 py-0.5 font-sans text-[10px] font-semibold uppercase tracking-widest"
           style={{ borderColor: `${color}33`, color }}
         >
-          {company.regionTag}
+          {company.industry}
         </span>
         <h3 className="font-sans text-2xl font-black uppercase leading-[0.95] tracking-tighter text-white">
-          {company.name}
+          {location.facilityType}
         </h3>
-        <p className="font-sans text-sm text-muted">{company.city}</p>
+        <p className="font-sans text-sm text-muted">
+          {location.city}, {location.state}
+        </p>
       </div>
+
+      {/* Highlight */}
+      <p className="font-sans text-sm leading-relaxed text-slate-300">
+        {location.highlight}
+      </p>
 
       {/* Stats grid */}
       <div className="grid grid-cols-2 gap-2">
@@ -93,22 +139,12 @@ function SidebarActive({
         ))}
       </div>
 
-      {/* Details list */}
-      <div className="flex flex-col">
-        {company.details.map((d, i) => (
-          <div
-            key={d.label}
-            className={cn(
-              "flex items-center justify-between py-2",
-              i < company.details.length - 1 && "border-b border-white/[0.06]"
-            )}
-          >
-            <span className="font-sans text-sm text-slate-300">{d.label}</span>
-            <span className="font-sans text-sm font-bold" style={{ color }}>
-              {d.value}
-            </span>
-          </div>
-        ))}
+      {/* Company name */}
+      <div className="flex items-center justify-between border-y border-white/[0.06] py-2.5">
+        <span className="font-sans text-sm text-slate-300">Operated by</span>
+        <span className="font-sans text-sm font-bold" style={{ color }}>
+          {company.name}
+        </span>
       </div>
 
       {/* Buttons */}
@@ -126,27 +162,47 @@ function SidebarActive({
           View All Locations
         </button>
       </div>
-
-      {/* Legend */}
-      <div className="flex flex-wrap gap-x-4 gap-y-2 border-t border-white/[0.06] pt-4">
-        {INDUSTRIES.map((ind) => (
-          <div key={ind} className="flex items-center gap-1.5">
-            <span
-              className="h-2 w-2 shrink-0 rounded-full"
-              style={{ backgroundColor: INDUSTRY_COLORS[ind] }}
-            />
-            <span className="font-sans text-[10px] text-muted">{ind}</span>
-          </div>
-        ))}
-      </div>
     </motion.div>
   );
 }
 
 // ─── Main component ───────────────────────────────────────────────────────────
 
-export function MapVisualization() {
-  const [active, setActive] = useState<MapCompany | null>(null);
+interface MapVisualizationProps {
+  industries?: SubCompany["industry"][];
+}
+
+export function MapVisualization({ industries }: MapVisualizationProps = {}) {
+  const [active, setActive] = useState<MapLocation | null>(null);
+  const [activeFilters, setActiveFilters] = useState<Set<SubCompany["industry"]>>(
+    new Set()
+  );
+
+  const locations = industries
+    ? MAP_LOCATIONS.filter((l) => industries.includes(companyFor(l).industry))
+    : MAP_LOCATIONS;
+
+  const toggleFilter = (industry: SubCompany["industry"]) => {
+    setActiveFilters((prev) => {
+      const next = new Set(prev);
+      if (next.size === 0) {
+        // Nothing filtered yet — clicking one isolates it
+        INDUSTRIES.forEach((i) => i !== industry && next.add(i));
+        return next;
+      }
+      if (next.has(industry)) {
+        next.delete(industry);
+      } else {
+        next.add(industry);
+      }
+      // If everything ends up filtered out (or everything is back on), reset to "show all"
+      if (next.size === 0 || next.size === INDUSTRIES.length) {
+        return new Set();
+      }
+      return next;
+    });
+    setActive(null);
+  };
 
   return (
     <div className="grid min-h-[600px] grid-cols-1 gap-0 overflow-hidden rounded-sm border border-white/[0.06] bg-surface-dark lg:grid-cols-12">
@@ -199,16 +255,20 @@ export function MapVisualization() {
             }
           </Geographies>
 
-          {MAP_COMPANIES.map((company) => {
+          {locations.map((location) => {
+            const company = companyFor(location);
             const color = INDUSTRY_COLORS[company.industry];
-            const isActive = active?.id === company.id;
+            const isActive = active?.id === location.id;
+            const isVisible =
+              activeFilters.size === 0 || activeFilters.has(company.industry);
 
-            const handleClick = () => setActive(isActive ? null : company);
+            const handleClick = () => setActive(isActive ? null : location);
 
             return (
               <Marker
-                key={company.id}
-                coordinates={company.coordinates}
+                key={location.id}
+                coordinates={location.coordinates}
+                opacity={isVisible ? 1 : 0.15}
               >
                 {/* Pulsing outer ring — no pointer events */}
                 <circle
@@ -216,7 +276,7 @@ export function MapVisualization() {
                   fill={color}
                   fillOpacity={isActive ? 0.25 : 0.15}
                   pointerEvents="none"
-                  style={{ animation: "pulse-ring 2s infinite" }}
+                  style={{ animation: isVisible ? "pulse-ring 2s infinite" : "none" }}
                 />
                 {/* Inner dot — no pointer events */}
                 <circle
@@ -230,7 +290,7 @@ export function MapVisualization() {
                 <circle
                   r={22}
                   fill="transparent"
-                  pointerEvents="all"
+                  pointerEvents={isVisible ? "all" : "none"}
                   cursor="pointer"
                   onClick={handleClick}
                 />
@@ -258,6 +318,13 @@ export function MapVisualization() {
             Network Online
           </span>
         </div>
+
+        {/* Filter legend */}
+        {!industries && (
+          <div className="absolute bottom-4 right-4 rounded-sm border border-white/[0.06] bg-surface-darker/80 p-2 backdrop-blur-sm">
+            <FilterLegend activeFilters={activeFilters} onToggle={toggleFilter} />
+          </div>
+        )}
       </div>
 
       {/* ── Sidebar (4 cols) ────────────────────────────────────── */}
@@ -266,7 +333,7 @@ export function MapVisualization() {
           {active ? (
             <SidebarActive
               key={active.id}
-              company={active}
+              location={active}
               onDeselect={() => setActive(null)}
             />
           ) : (
@@ -280,18 +347,12 @@ export function MapVisualization() {
             >
               <SidebarEmpty />
 
-              {/* Legend always visible in empty state */}
-              <div className="mt-auto flex flex-wrap gap-x-4 gap-y-2 border-t border-white/[0.06] p-5">
-                {INDUSTRIES.map((ind) => (
-                  <div key={ind} className="flex items-center gap-1.5">
-                    <span
-                      className="h-2 w-2 shrink-0 rounded-full"
-                      style={{ backgroundColor: INDUSTRY_COLORS[ind] }}
-                    />
-                    <span className="font-sans text-[10px] text-muted">{ind}</span>
-                  </div>
-                ))}
-              </div>
+              {/* Filter legend always visible in empty state */}
+              {!industries && (
+                <div className="mt-auto border-t border-white/[0.06] p-5">
+                  <FilterLegend activeFilters={activeFilters} onToggle={toggleFilter} />
+                </div>
+              )}
             </motion.div>
           )}
         </AnimatePresence>

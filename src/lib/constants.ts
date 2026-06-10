@@ -81,109 +81,181 @@ export const LEGAL_LINKS: NavLink[] = [
   { label: "Terms of Service", href: "/terms" },
 ];
 
-export interface MapCompanyStat   { label: string; value: string }
-export interface MapCompanyDetail { label: string; value: string }
+export interface MapCompanyStat { label: string; value: string }
 
-export interface MapCompany {
+export interface SubCompany {
   id: string;
-  industry: "Warehousing" | "Charter Spaces" | "Real Estate" | "Electronics";
   name: string;
-  regionTag: string;
-  region: string;
-  city: string;
+  industry: "Warehousing" | "Charter Spaces" | "Real Estate";
   href: string;
-  coordinates: [number, number];
-  stats: MapCompanyStat[];
-  details: MapCompanyDetail[];
   ctaLabel: string;
+  stats: MapCompanyStat[];
 }
 
-export const INDUSTRY_COLORS: Record<MapCompany["industry"], string> = {
+export interface MapLocation {
+  id: string;
+  companyId: string;
+  city: string;
+  state: string;
+  coordinates: [number, number];
+  facilityType: string;
+  highlight: string;
+}
+
+export const INDUSTRY_COLORS: Record<SubCompany["industry"], string> = {
   "Warehousing":    "#2559f4",
   "Charter Spaces": "#f59e0b",
   "Real Estate":    "#10b981",
-  "Electronics":    "#a855f7",
 };
 
-export const MAP_COMPANIES: MapCompany[] = [
+export const SUB_COMPANIES: SubCompany[] = [
   {
-    id: "ojha-logistics-west",
+    id: "ojha-logistics",
+    name: "Ojha Logistics",
     industry: "Warehousing",
-    name: "Ojha Logistics West",
-    regionTag: "Region 01",
-    region: "Western Corridor",
-    city: "Mumbai, Maharashtra",
     href: "/hub-operations",
-    coordinates: [72.8777, 19.0760],
-    stats: [
-      { label: "Sq. Ft. Total", value: "4.2M" },
-      { label: "Active Hubs",   value: "14"   },
-    ],
-    details: [
-      { label: "Multi-user Hubs",         value: "08" },
-      { label: "Cold Chain Units",         value: "04" },
-      { label: "Hazardous Containment",    value: "02" },
-    ],
     ctaLabel: "View Regional Operations",
-  },
-  {
-    id: "charter-spaces-delhi",
-    industry: "Charter Spaces",
-    name: "Charter Spaces North",
-    regionTag: "Region 02",
-    region: "Northern Hub",
-    city: "New Delhi",
-    href: "/charter-spaces",
-    coordinates: [77.2090, 28.6139],
     stats: [
-      { label: "Managed Offices", value: "12+" },
-      { label: "Cities",          value: "3"   },
+      { label: "Sq. Ft. Total", value: "6.0M" },
+      { label: "Active Hubs",   value: "19"   },
     ],
-    details: [
-      { label: "Private Offices", value: "40" },
-      { label: "Managed Suites",  value: "18" },
-      { label: "Hybrid Hubs",     value: "06" },
-    ],
-    ctaLabel: "Explore Workspaces",
   },
   {
-    id: "ojha-real-estate-south",
+    id: "charter-spaces",
+    name: "Charter Spaces",
+    industry: "Charter Spaces",
+    href: "/charter-spaces",
+    ctaLabel: "Explore Workspaces",
+    stats: [
+      { label: "Managed Offices",  value: "12+" },
+      { label: "Sq. Ft. Managed",  value: "1M+" },
+    ],
+  },
+  {
+    id: "ojha-real-estate",
+    name: "Ojha Real Estate",
     industry: "Real Estate",
-    name: "Ojha Real Estate South",
-    regionTag: "Region 03",
-    region: "Southern Corridor",
-    city: "Bengaluru, Karnataka",
     href: "/real-estate",
-    coordinates: [77.5946, 12.9716],
+    ctaLabel: "View Portfolio",
     stats: [
       { label: "Grade-A Assets", value: "6"   },
       { label: "Occupancy",      value: "96%" },
     ],
-    details: [
-      { label: "Office Spaces", value: "04" },
-      { label: "Retail Hubs",   value: "01" },
-      { label: "Mixed-Use",     value: "01" },
-    ],
-    ctaLabel: "View Portfolio",
+  },
+];
+
+export const MAP_LOCATIONS: MapLocation[] = [
+  // Ojha Logistics — Warehousing
+  {
+    id: "logistics-bhiwandi",
+    companyId: "ojha-logistics",
+    city: "Bhiwandi",
+    state: "Maharashtra",
+    coordinates: [73.0631, 19.3002],
+    facilityType: "Multi-User Distribution Hub",
+    highlight: "800,000 sq ft dry storage with temperature-controlled bays",
   },
   {
-    id: "ojha-warehousing-east",
-    industry: "Warehousing",
-    name: "Ojha Logistics East",
-    regionTag: "Region 04",
-    region: "Eastern Corridor",
-    city: "Kolkata, West Bengal",
-    href: "/hub-operations",
-    coordinates: [88.3639, 22.5726],
-    stats: [
-      { label: "Sq. Ft. Total", value: "1.8M" },
-      { label: "Active Hubs",   value: "5"    },
-    ],
-    details: [
-      { label: "Multi-user Hubs",      value: "03" },
-      { label: "Cold Chain Units",      value: "01" },
-      { label: "Hazardous Containment", value: "01" },
-    ],
-    ctaLabel: "View Regional Operations",
+    id: "logistics-pune",
+    companyId: "ojha-logistics",
+    city: "Pune",
+    state: "Maharashtra",
+    coordinates: [73.8567, 18.5204],
+    facilityType: "Industrial & Logistics Park",
+    highlight: "Strategic access to the Pune–Mumbai expressway corridor",
+  },
+  {
+    id: "logistics-anand",
+    companyId: "ojha-logistics",
+    city: "Anand",
+    state: "Gujarat",
+    coordinates: [72.9289, 22.5645],
+    facilityType: "Cold Chain & FMCG Hub",
+    highlight: "Dedicated cold storage for dairy and perishable goods",
+  },
+  {
+    id: "logistics-hazira",
+    companyId: "ojha-logistics",
+    city: "Hazira",
+    state: "Gujarat",
+    coordinates: [72.6500, 21.1167],
+    facilityType: "Port-Linked Warehousing",
+    highlight: "Bonded storage near Hazira port for import/export cargo",
+  },
+  {
+    id: "logistics-verna",
+    companyId: "ojha-logistics",
+    city: "Verna",
+    state: "Goa",
+    coordinates: [73.9400, 15.3667],
+    facilityType: "Industrial Estate Facility",
+    highlight: "Multi-client warehousing within Verna Industrial Estate",
+  },
+  {
+    id: "logistics-mangalore",
+    companyId: "ojha-logistics",
+    city: "Mangalore",
+    state: "Karnataka",
+    coordinates: [74.8560, 12.9141],
+    facilityType: "Coastal Distribution Center",
+    highlight: "Serves the South Indian coastal logistics network",
+  },
+
+  // Charter Spaces
+  {
+    id: "charter-mumbai",
+    companyId: "charter-spaces",
+    city: "Mumbai (BKC)",
+    state: "Maharashtra",
+    coordinates: [72.8656, 19.0660],
+    facilityType: "Managed Office Campus",
+    highlight: "Premium workspace in Mumbai's financial district",
+  },
+  {
+    id: "charter-bengaluru",
+    companyId: "charter-spaces",
+    city: "Bengaluru",
+    state: "Karnataka",
+    coordinates: [77.5946, 12.9716],
+    facilityType: "Tech Corridor Campus",
+    highlight: "Flexible suites for technology and startup tenants",
+  },
+  {
+    id: "charter-gurugram",
+    companyId: "charter-spaces",
+    city: "Gurugram",
+    state: "Haryana",
+    coordinates: [77.0266, 28.4595],
+    facilityType: "Cyber City Hub",
+    highlight: "Enterprise-grade managed offices near Cyber City",
+  },
+
+  // Ojha Real Estate
+  {
+    id: "realestate-gurugram",
+    companyId: "ojha-real-estate",
+    city: "Gurugram",
+    state: "Haryana",
+    coordinates: [77.0450, 28.4450],
+    facilityType: "The Ojha Nexus",
+    highlight: "21-storey Grade-A commercial tower in Cyber City",
+  },
+  {
+    id: "realestate-mumbai",
+    companyId: "ojha-real-estate",
+    city: "Mumbai (BKC)",
+    state: "Maharashtra",
+    coordinates: [72.8800, 19.0600],
+    facilityType: "Zenith Plaza",
+    highlight: "LEED Gold commercial tower in the BKC financial district",
+  },
+  {
+    id: "realestate-bengaluru",
+    companyId: "ojha-real-estate",
+    city: "Bengaluru",
+    state: "Karnataka",
+    coordinates: [77.6100, 12.9550],
+    facilityType: "Southern Portfolio",
+    highlight: "6 Grade-A office and mixed-use assets across the city",
   },
 ];

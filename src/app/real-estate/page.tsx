@@ -4,6 +4,7 @@ import { SectionHeader }  from "@/components/sections/SectionHeader";
 import { PropertyCard }   from "@/components/cards/PropertyCard";
 import { AdvantageCard }  from "@/components/cards/AdvantageCard";
 import { LogoStrip }      from "@/components/sections/LogoStrip";
+import { MapVisualization } from "@/components/ui/MapVisualization";
 import { ChecklistItem }  from "@/components/ui/ChecklistItem";
 import { EnquiryForm }    from "@/components/compound/EnquiryForm";
 import { ContactInfo, InfoCard } from "@/components/compound/ContactInfo";
@@ -183,10 +184,23 @@ export default function RealEstatePage() {
         </div>
       </FadeInSection>
 
-      {/* 5 — Logo Strip */}
+      {/* 5 — Network Connectivity */}
+      <FadeInSection className="border-y border-white/[0.05] bg-surface-darker/60 py-16" delay={0.1}>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeader
+            eyebrow="Geographic Footprint"
+            title="Our Property Network"
+            subtitle="Grade-A commercial assets strategically located across India's key business districts."
+            className="mb-10"
+          />
+          <MapVisualization industries={["Real Estate"]} />
+        </div>
+      </FadeInSection>
+
+      {/* 6 — Logo Strip */}
       <LogoStrip eyebrow="Trusted by Global Leaders" logos={TENANTS} />
 
-      {/* 6 — Governance */}
+      {/* 7 — Governance */}
       <FadeInSection className="py-20" delay={0.1}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <p className="font-sans text-[10px] font-semibold uppercase tracking-[0.2em] text-primary mb-6">
@@ -244,7 +258,7 @@ export default function RealEstatePage() {
         </div>
       </FadeInSection>
 
-      {/* 7 — Enquiry + Contact */}
+      {/* 8 — Enquiry + Contact */}
       <FadeInSection className="border-t border-white/[0.05] bg-surface-darker/40 py-20" delay={0.1}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-10">

@@ -6,6 +6,7 @@ import { FeatureCard }   from "@/components/cards/FeatureCard";
 import { ChecklistItem } from "@/components/ui/ChecklistItem";
 import { EnquiryForm }   from "@/components/compound/EnquiryForm";
 import { FadeInSection } from "@/components/ui/FadeInSection";
+import { MapVisualization } from "@/components/ui/MapVisualization";
 
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 
@@ -273,7 +274,20 @@ export default function CharterSpacesPage() {
         </div>
       </FadeInSection>
 
-      {/* 7 — Request a Proposal (EnquiryForm centred) */}
+      {/* 7 — Network Connectivity */}
+      <FadeInSection className="border-t border-white/[0.05] bg-surface-darker/60 py-16" delay={0.1}>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeader
+            eyebrow="Workspace Network"
+            title="Find a Location Near You"
+            subtitle="Managed office locations connected via a unified enterprise network."
+            className="mb-10"
+          />
+          <MapVisualization industries={["Charter Spaces"]} />
+        </div>
+      </FadeInSection>
+
+      {/* 8 — Request a Proposal (EnquiryForm centred) */}
       <FadeInSection className="border-t border-white/[0.05] py-20" delay={0.1}>
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <div className="mb-10 text-center">

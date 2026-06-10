@@ -34,10 +34,10 @@ const STATS = [
 ];
 
 const VERTICALS = [
-  { number: 1, title: "Warehousing",     description: "Grade-A logistics infrastructure with multi-modal connectivity spanning India's key industrial corridors.",         image: "https://images.unsplash.com/photo-1672552226380-486fe900b322?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",  href: "/industries#warehousing"  },
-  { number: 2, title: "Charter Spaces",  description: "Asset-backed managed offices delivering pricing stability and operational continuity for enterprise tenants.",        image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=2301&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",    href: "/industries#charter"      },
-  { number: 3, title: "Commercial Spaces",     description: "Premium Grade-A commercial and retail developments in India's most influential urban corridors.",                    image: "https://images.unsplash.com/photo-1582407947304-fd86f028f716?q=80&w=3996&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", href: "/industries#real-estate"  },
-  { number: 4, title: "Electronics",     description: "Precision electronics manufacturing and distribution, powering next-generation industrial and consumer solutions.",   image: "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?q=80&w=3269&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",href: "/industries#electronics"  },
+  { number: 1, title: "Warehousing",     description: "Grade-A logistics infrastructure with multi-modal connectivity spanning India's key industrial corridors.",         image: "https://images.unsplash.com/photo-1672552226380-486fe900b322?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",  href: "/warehousing"  },
+  { number: 2, title: "Charter Spaces",  description: "Asset-backed managed offices delivering pricing stability and operational continuity for enterprise tenants.",        image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=2301&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",    href: "/charter-spaces"      },
+  { number: 3, title: "Commercial Spaces",     description: "Premium Grade-A commercial and retail developments in India's most influential urban corridors.",                    image: "https://images.unsplash.com/photo-1582407947304-fd86f028f716?q=80&w=3996&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", href: "/real-estate"  },
+  { number: 4, title: "Electronics",     description: "Precision electronics manufacturing and distribution, powering next-generation industrial and consumer solutions.",   image: "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?q=80&w=3269&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",href: "/contact"  },
 ];
 
 const CAPABILITIES = [
@@ -45,25 +45,21 @@ const CAPABILITIES = [
     icon: "precision_manufacturing",
     title: "Maintenance",
     description: "Proactive infrastructure upkeep and 24/7 technical monitoring to prevent downtime across all managed assets.",
-    link: { label: "Learn More", href: "/services#maintenance" },
   },
   {
     icon: "support_agent",
     title: "Support",
     description: "Dedicated account management and expert consultative support for all operations and client requirements.",
-    link: { label: "Learn More", href: "/services#support" },
   },
   {
     icon: "engineering",
     title: "Engineering",
     description: "Custom precision engineering solutions designed for complex industrial requirements and large-scale projects.",
-    link: { label: "Learn More", href: "/services#engineering" },
   },
   {
     icon: "payments",
     title: "Pricing",
     description: "Competitive asset-backed pricing models that maximise ROI for our stakeholders and long-term partners.",
-    link: { label: "Learn More", href: "/services#pricing" },
   },
 ];
 
@@ -214,12 +210,7 @@ export default function HomePage() {
             title="Business Verticals"
             subtitle="Comprehensive industrial and commercial solutions tailored for modern commerce, leveraging decades of operational expertise."
           />
-          <a
-            href="/industries"
-            className="shrink-0 font-sans text-[11px] font-semibold uppercase tracking-[0.14em] text-primary hover:text-primary-glow transition-colors"
-          >
-            View All Divisions →
-          </a>
+          
         </div>
         <div className="grid grid-cols-2 gap-px lg:grid-cols-4">
           {VERTICALS.map((v) => (
