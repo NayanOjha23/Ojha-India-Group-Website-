@@ -3,9 +3,9 @@ import Image from "next/image";
 import { HeroSection }        from "@/components/sections/HeroSection";
 import { SectionHeader }       from "@/components/sections/SectionHeader";
 import { FeatureCard }         from "@/components/cards/FeatureCard";
-import { MetricCard }          from "@/components/cards/MetricCard";
 import { LeadershipQuote }     from "@/components/compound/LeadershipQuote";
 import { MilestoneTimeline }   from "@/components/compound/MilestoneTimeline";
+import { MetricsGrid }         from "@/components/compound/MetricsGrid";
 import { FadeInSection }       from "@/components/ui/FadeInSection";
 import { CornerFrame }         from "@/components/ui/CornerFrame";
 
@@ -30,26 +30,31 @@ const MILESTONES = [
     year: "1994",
     title: "Founding",
     description: "Established in Gurugram with a focus on industrial infrastructure and engineering excellence.",
+    icon: "flag",
   },
   {
     year: "2002",
     title: "First Warehouse",
     description: "Built India's first high-set commercial and residential infrastructure combining warehousing standards.",
+    icon: "warehouse",
   },
   {
     year: "2008",
     title: "Diversification",
     description: "Broadened into Charter Spaces and managed workspaces, establishing warehousing standards.",
+    icon: "hub",
   },
   {
     year: "2016",
     title: "Electronics",
     description: "Launched advanced electronics division, strengthening the group's technology and innovation footprint.",
+    icon: "memory",
   },
   {
     year: "2024",
     title: "National Expansion",
     description: "A pan-India presence established across 25 cities, serving global Fortune 500 clients.",
+    icon: "public",
   },
 ];
 
@@ -114,7 +119,7 @@ export default function AboutPage() {
         subtext="Since 1994, Ojha Group has been a cornerstone of India's infrastructure, evolving from a regional player to a diversified national conglomerate."
         primaryBtn={{ label: "View Our Portfolio", href: "/projects"  }}
         ghostBtn={{ label: "Corporate Vision",    href: "/about#vision" }}
-        backgroundImage="https://picsum.photos/seed/ojhaabout/1600/900"
+        backgroundImage="https://images.unsplash.com/photo-1550763347-0736ab2976ea?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
       />
 
       {/* 2 — Milestone Timeline */}
@@ -129,7 +134,7 @@ export default function AboutPage() {
       </FadeInSection>
 
       {/* 3 — Leadership Quote */}
-      <FadeInSection className="border-t border-white/[0.04] bg-surface-darker/40 py-24" delay={0.1}>
+      <FadeInSection className="border-t border-white/[0.05] bg-surface-darker/40 py-20" delay={0.1}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <LeadershipQuote
             quote="Our leadership philosophy is rooted in building not just structures, but trust and lasting impact across the nation. We create ecosystems where businesses thrive, ensuring that every square foot we manage adds tangible value to India's growth story."
@@ -156,15 +161,11 @@ export default function AboutPage() {
             Measuring our success through scale, impact, and the people we empower across the Indian subcontinent.
           </p>
         </div>
-        <div className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4">
-          {GROUP_METRICS.map((m) => (
-            <MetricCard key={m.label} {...m} />
-          ))}
-        </div>
+        <MetricsGrid metrics={GROUP_METRICS} className="mt-10" />
       </FadeInSection>
 
       {/* 5 — Values */}
-      <FadeInSection className="border-t border-white/[0.04] bg-surface-darker/40 py-20" delay={0.1}>
+      <FadeInSection className="border-t border-white/[0.05] bg-surface-darker/40 py-20" delay={0.1}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="What Drives Us"
@@ -182,7 +183,7 @@ export default function AboutPage() {
       </FadeInSection>
 
       {/* 6 — Sustainability */}
-      <FadeInSection className="border-t border-white/[0.04] py-20" delay={0.1}>
+      <FadeInSection className="border-t border-white/[0.05] py-20" delay={0.1}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
 
