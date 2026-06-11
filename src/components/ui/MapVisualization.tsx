@@ -26,6 +26,21 @@ function companyFor(location: MapLocation): SubCompany {
   return SUB_COMPANIES.find((c) => c.id === location.companyId)!;
 }
 
+function statesFor(companyId: string): string[] {
+  return Array.from(
+    new Set(MAP_LOCATIONS.filter((l) => l.companyId === companyId).map((l) => l.state))
+  );
+}
+
+function initialsFor(name: string): string {
+  return name
+    .split(" ")
+    .map((w) => w[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+}
+
 // ─── Filter legend ───────────────────────────────────────────────────────────
 
 function FilterLegend({
@@ -94,6 +109,7 @@ function SidebarActive({
   const router = useRouter();
   const company = companyFor(location);
   const color = INDUSTRY_COLORS[company.industry];
+  const states = statesFor(company.id);
 
   return (
     <motion.div
@@ -101,59 +117,123 @@ function SidebarActive({
       initial={{ opacity: 0, x: 10 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.25, ease: "easeOut" }}
-      className="flex h-full flex-col gap-5 p-5"
+      className="flex h-full flex-col gap-5 overflow-y-auto p-5"
     >
       {/* Header */}
-      <div className="flex flex-col gap-2">
+      <div className="flex items-start justify-between gap-3">
         <span
-          className="inline-flex w-fit rounded-sm border px-2 py-0.5 font-sans text-[10px] font-semibold uppercase tracking-widest"
-          style={{ borderColor: `${color}33`, color }}
+          className="inline-flex w-fit items-center rounded-sm border px-2 py-0.5 font-sans text-[10px] font-bold uppercase tracking-widest"
+          style={{ borderColor: `${color}4D`, backgroundColor: `${color}1A`, color }}
         >
           {company.industry}
         </span>
-        <h3 className="font-sans text-2xl font-black uppercase leading-[0.95] tracking-tighter text-white">
+        <span
+          className="material-symbols-outlined shrink-0 text-[20px] text-muted"
+          style={{ fontVariationSettings: "'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24" }}
+          aria-hidden="true"
+        >
+          my_location
+        </span>
+      </div>
+
+      {/* Title + ID */}
+      <div className="flex flex-col gap-1.5">
+        <h3 className="font-sans text-2xl font-black uppercase leading-[1.05] tracking-tight text-white">
           {location.facilityType}
         </h3>
         <p className="font-sans text-sm text-muted">
           {location.city}, {location.state}
         </p>
+        <p className="font-mono text-[11px] uppercase tracking-widest text-muted/70">
+          ID: {location.code}
+        </p>
       </div>
 
-      {/* Highlight */}
-      <p className="font-sans text-sm leading-relaxed text-slate-300">
-        {location.highlight}
-      </p>
+      <div className="border-t border-white/[0.06]" />
 
-      {/* Stats grid */}
-      <div className="grid grid-cols-2 gap-2">
-        {company.stats.map((s) => (
+      {/* Stats row */}
+      <div className="grid grid-cols-2 divide-x divide-white/[0.06]">
+        {company.stats.map((s, i) => (
           <div
             key={s.label}
-            className="flex flex-col gap-1 rounded-sm border border-white/[0.06] p-3"
+            className={cn("flex flex-col gap-1.5", i === 0 ? "pr-4" : "pl-4")}
           >
-            <span className="font-sans text-xl font-bold text-white">{s.value}</span>
-            <span className="font-sans text-[9px] uppercase tracking-widest text-muted">
+            <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.16em] text-muted">
               {s.label}
+            </span>
+            <span className="font-sans text-2xl font-black leading-none text-white">
+              {s.value}
             </span>
           </div>
         ))}
       </div>
 
-      {/* Company name */}
-      <div className="flex items-center justify-between border-y border-white/[0.06] py-2.5">
-        <span className="font-sans text-sm text-slate-300">Operated by</span>
-        <span className="font-sans text-sm font-bold" style={{ color }}>
-          {company.name}
-        </span>
+      {/* Key infrastructure */}
+      <div className="flex flex-col gap-1">
+        <h4 className="border-b border-white/[0.06] pb-2 font-sans text-[10px] font-semibold uppercase tracking-[0.18em] text-muted">
+          Key Infrastructure
+        </h4>
+        <div className="flex flex-col">
+          {location.infrastructure.map((item, i) => (
+            <div
+              key={item.label}
+              className={cn(
+                "flex items-center justify-between py-2.5",
+                i < location.infrastructure.length - 1 && "border-b border-white/[0.04]"
+              )}
+            >
+              <div className="flex items-center gap-2.5">
+                <span
+                  className="material-symbols-outlined text-[18px]"
+                  style={{ color, fontVariationSettings: "'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24" }}
+                  aria-hidden="true"
+                >
+                  {item.icon}
+                </span>
+                <span className="font-sans text-sm text-slate-300">{item.label}</span>
+              </div>
+              <span className="font-sans text-sm font-bold text-white">{item.value}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Operated by */}
+      <div className="flex flex-col gap-3">
+        <h4 className="border-b border-white/[0.06] pb-2 font-sans text-[10px] font-semibold uppercase tracking-[0.18em] text-muted">
+          Operated By
+        </h4>
+        <div className="flex items-center gap-3">
+          <div
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm border font-sans text-sm font-black"
+            style={{ borderColor: `${color}4D`, backgroundColor: `${color}1A`, color }}
+          >
+            {initialsFor(company.name)}
+          </div>
+          <span className="font-sans text-sm font-bold text-white">{company.name}</span>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {states.map((s) => (
+            <span
+              key={s}
+              className="rounded-sm border border-white/[0.08] bg-white/[0.03] px-2 py-1 font-sans text-[10px] text-muted"
+            >
+              {s}
+            </span>
+          ))}
+        </div>
       </div>
 
       {/* Buttons */}
-      <div className="mt-auto flex flex-col gap-2.5">
+      <div className="mt-auto flex flex-col gap-2.5 pt-2">
         <button
           onClick={() => router.push(company.href)}
-          className="w-full rounded-sm bg-white py-2.5 font-sans text-[11px] font-semibold uppercase tracking-[0.14em] text-surface-dark transition-colors hover:bg-white/90"
+          className="flex w-full items-center justify-center gap-2 rounded-sm bg-white py-2.5 font-sans text-[11px] font-semibold uppercase tracking-[0.14em] text-surface-dark transition-colors hover:bg-white/90"
         >
           {company.ctaLabel}
+          <span className="material-symbols-outlined text-[16px]" aria-hidden="true">
+            arrow_forward
+          </span>
         </button>
         <button
           onClick={onDeselect}
@@ -205,10 +285,13 @@ export function MapVisualization({ industries }: MapVisualizationProps = {}) {
   };
 
   return (
-    <div className="grid min-h-[600px] grid-cols-1 gap-0 overflow-hidden rounded-sm border border-white/[0.06] bg-surface-dark lg:grid-cols-12">
+    <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-stretch lg:gap-8">
 
       {/* ── Map panel (8 cols) ──────────────────────────────────── */}
-      <div className="relative min-h-[500px] lg:col-span-8">
+      <div
+        className="relative min-h-[500px] overflow-hidden rounded-sm border border-white/[0.06] bg-surface-dark lg:col-span-8 lg:min-h-[600px]"
+        style={{ boxShadow: "0 0 30px rgba(77, 123, 255, 0.1)" }}
+      >
         {/* Subtle grid bg */}
         <div
           className="absolute inset-0 opacity-[0.04]"
@@ -328,7 +411,10 @@ export function MapVisualization({ industries }: MapVisualizationProps = {}) {
       </div>
 
       {/* ── Sidebar (4 cols) ────────────────────────────────────── */}
-      <div className="flex flex-col border-t border-white/[0.06] lg:col-span-4 lg:border-l lg:border-t-0">
+      <div
+        className="flex flex-col overflow-hidden rounded-sm border border-white/[0.06] bg-white/[0.02] lg:col-span-4"
+        style={{ boxShadow: "0 0 30px rgba(77, 123, 255, 0.1)" }}
+      >
         <AnimatePresence mode="wait">
           {active ? (
             <SidebarActive
