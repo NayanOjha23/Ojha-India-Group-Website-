@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -10,16 +11,15 @@ import { NAV_LINKS, INDUSTRIES_DROPDOWN, SITE_NAME } from "@/lib/constants";
 
 function OjhaLogo() {
   return (
-    <Link href="/" className="flex items-center gap-2.5 shrink-0">
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-        <rect width="28" height="28" rx="4" fill="#2559f4" />
-        <polygon points="14,6 24,22 4,22" fill="none" stroke="white" strokeWidth="2" strokeLinejoin="round" />
-        <line x1="14" y1="6" x2="14" y2="22" stroke="white" strokeWidth="1.2" opacity="0.5" />
-        <line x1="4" y1="22" x2="24" y2="22" stroke="white" strokeWidth="1.2" opacity="0.5" />
-      </svg>
-      <span className="font-sans text-sm font-semibold tracking-[0.06em] text-white uppercase">
-        {SITE_NAME}
-      </span>
+    <Link href="/" className="flex shrink-0 items-center">
+      <Image
+        src="/logos/OIG Logo.png"
+        alt={SITE_NAME}
+        width={177}
+        height={101}
+        priority
+        className="h-9 w-auto"
+      />
     </Link>
   );
 }

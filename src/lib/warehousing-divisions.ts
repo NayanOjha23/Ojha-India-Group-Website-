@@ -85,7 +85,7 @@ export const WAREHOUSING_DIVISIONS: WarehousingDivisionData[] = [
       highlightedWord: "Unified Standards.",
       subtext:
         "Specialised warehousing solutions for West India's industrial heartlands. Delivering the global Ojha excellence through localised expertise.",
-      backgroundImage: "https://picsum.photos/seed/hubhero/1600/900",
+      backgroundImage: "https://images.unsplash.com/photo-1587293852726-70cdb56c2866?q=80&w=3272&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     coverage: {
       title: "Regional Coverage",
@@ -124,7 +124,7 @@ export const WAREHOUSING_DIVISIONS: WarehousingDivisionData[] = [
         "Grade-A assets equipped with climate control, automated material handling, and integrated digital tracking.",
       items: [
         {
-          image: "https://picsum.photos/seed/drymulti/600/400",
+          image: "https://images.unsplash.com/photo-1590247813693-5541d1c609fd?q=80&w=3309&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           badge: { label: "800,000 SQFT", color: "green" },
           title: "Dry Multi-Store",
           features: ["12m Clear Height", "FM2 Flooring", "Automated MHE"],
@@ -141,7 +141,7 @@ export const WAREHOUSING_DIVISIONS: WarehousingDivisionData[] = [
           },
         },
         {
-          image: "https://picsum.photos/seed/coldchainwest/600/400",
+          image: "https://images.unsplash.com/photo-1684695749267-233af13276d0?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           badge: { label: "AUTO-READY", color: "blue" },
           title: "Cold Chain Hub",
           features: ["Multi-temp Chambers", "24/7 Power Backup", "Pharma Grade"],
@@ -158,7 +158,7 @@ export const WAREHOUSING_DIVISIONS: WarehousingDivisionData[] = [
           },
         },
         {
-          image: "https://picsum.photos/seed/indchem/600/400",
+          image: "https://images.unsplash.com/photo-1622030411594-c282a63aa1bc?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           badge: { label: "PESO APPROVED", color: "amber" },
           title: "Ind. & Chemical",
           features: ["Fire Suppression", "Spill Containment", "HAZMAT Ready"],
@@ -175,7 +175,7 @@ export const WAREHOUSING_DIVISIONS: WarehousingDivisionData[] = [
           },
         },
         {
-          image: "https://picsum.photos/seed/ecomfulfilment/600/400",
+          image: "https://images.unsplash.com/photo-1557761469-f29c6e201784?q=80&w=3249&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           badge: { label: "450,000 SQFT", color: "blue" },
           title: "E-Commerce Fulfilment Center",
           features: ["Automated Sortation", "Pune Tech Corridor", "Last-Mile Ready"],
@@ -251,7 +251,7 @@ export const WAREHOUSING_DIVISIONS: WarehousingDivisionData[] = [
       highlightedWord: "Pan-India Reach.",
       subtext:
         "Pharma-grade and FMCG cold chain infrastructure spanning Central and North India. Delivering the global Ojha excellence through unbroken cold chains.",
-      backgroundImage: "https://picsum.photos/seed/coldchainhero/1600/900",
+      backgroundImage: "https://images.unsplash.com/photo-1601599561213-832382fd07ba?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.1.0",
     },
     coverage: {
       title: "Cold Chain Network",
@@ -278,7 +278,7 @@ export const WAREHOUSING_DIVISIONS: WarehousingDivisionData[] = [
         "Pharma-grade and FMCG cold storage assets equipped with multi-temp chambers, automated monitoring, and rapid cross-dock turnaround.",
       items: [
         {
-          image: "https://picsum.photos/seed/pharmacoldstorage/600/400",
+          image: "https://images.unsplash.com/photo-1694885169342-909981fb408a?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           badge: { label: "180,000 SQFT", color: "green" },
           title: "Pharma Cold Storage",
           features: ["-25°C to +25°C Range", "WHO-GMP Compliant", "24/7 Power Backup"],
@@ -295,7 +295,7 @@ export const WAREHOUSING_DIVISIONS: WarehousingDivisionData[] = [
           },
         },
         {
-          image: "https://picsum.photos/seed/fmcgdairyhub/600/400",
+          image: "https://images.unsplash.com/photo-1590247813693-5541d1c609fd?q=80&w=3309&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           badge: { label: "FMCG READY", color: "blue" },
           title: "FMCG & Dairy Hub",
           features: ["Multi-Temp Chambers", "Cross-Dock Bays", "Automated Sorting"],
@@ -312,7 +312,7 @@ export const WAREHOUSING_DIVISIONS: WarehousingDivisionData[] = [
           },
         },
         {
-          image: "https://picsum.photos/seed/crossdockreefer/600/400",
+          image: "https://images.unsplash.com/photo-1684695749267-233af13276d0?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           badge: { label: "RAPID TURNAROUND", color: "amber" },
           title: "Cross-Dock Distribution",
           features: ["10 Cross-dock Bays", "Reefer Truck Fleet", "Real-Time Tracking"],
@@ -329,7 +329,7 @@ export const WAREHOUSING_DIVISIONS: WarehousingDivisionData[] = [
           },
         },
         {
-          image: "https://picsum.photos/seed/frozenfoodshub/600/400",
+          image: "https://images.unsplash.com/photo-1622030411594-c282a63aa1bc?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           badge: { label: "FROZEN READY", color: "amber" },
           title: "Frozen Foods Hub",
           features: ["-30°C Deep Freeze", "Meat & Seafood Grade", "Automated Racking"],
@@ -405,7 +405,7 @@ export const WAREHOUSING_DIVISIONS: WarehousingDivisionData[] = [
       highlightedWord: "Engineered to Scale.",
       subtext:
         "Build-to-suit industrial estates across South India's manufacturing corridors. Delivering the global Ojha excellence through custom-engineered infrastructure.",
-      backgroundImage: "https://picsum.photos/seed/industrialparkshero/1600/900",
+      backgroundImage: "https://images.unsplash.com/photo-1627309366653-2dedc084cdf1?q=80&w=4066&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     coverage: {
       title: "Industrial Park Network",
@@ -432,7 +432,7 @@ export const WAREHOUSING_DIVISIONS: WarehousingDivisionData[] = [
         "Build-to-suit industrial estates equipped with high-capacity power, expansion-ready land, and multi-client bays.",
       items: [
         {
-          image: "https://picsum.photos/seed/multiclientbay/600/400",
+          image: "https://images.unsplash.com/photo-1557761469-f29c6e201784?q=80&w=3249&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           badge: { label: "650,000 SQFT", color: "green" },
           title: "Multi-Client Industrial Bay",
           features: ["14 Multi-Client Bays", "22 Loading Docks", "Auto Component Access"],
@@ -449,7 +449,7 @@ export const WAREHOUSING_DIVISIONS: WarehousingDivisionData[] = [
           },
         },
         {
-          image: "https://picsum.photos/seed/buildtosuitestate/600/400",
+          image: "https://images.unsplash.com/photo-1694885169342-909981fb408a?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           badge: { label: "BTS READY", color: "blue" },
           title: "Build-to-Suit Estate",
           features: ["5 MVA Power Capacity", "30 Acres Expansion Land", "Custom Engineering"],
@@ -466,7 +466,7 @@ export const WAREHOUSING_DIVISIONS: WarehousingDivisionData[] = [
           },
         },
         {
-          image: "https://picsum.photos/seed/manufacturingpark/600/400",
+          image: "https://images.unsplash.com/photo-1590247813693-5541d1c609fd?q=80&w=3309&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           badge: { label: "PESO APPROVED", color: "amber" },
           title: "Manufacturing Park",
           features: ["Heavy Power Infrastructure", "Dedicated Effluent Treatment", "24/7 Security"],
@@ -483,7 +483,7 @@ export const WAREHOUSING_DIVISIONS: WarehousingDivisionData[] = [
           },
         },
         {
-          image: "https://picsum.photos/seed/logisticsannex/600/400",
+          image: "https://images.unsplash.com/photo-1684695749267-233af13276d0?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           badge: { label: "450,000 SQFT", color: "green" },
           title: "Logistics & Distribution Annex",
           features: ["Adjacent to Manufacturing Park", "High-Bay Racking", "Multi-Modal Access"],
@@ -559,7 +559,7 @@ export const WAREHOUSING_DIVISIONS: WarehousingDivisionData[] = [
       highlightedWord: "Customs Cleared.",
       subtext:
         "Bonded, port-linked warehousing across India's western and eastern coastlines. Delivering the global Ojha excellence through seamless customs and cargo operations.",
-      backgroundImage: "https://picsum.photos/seed/portlogisticshero/1600/900",
+      backgroundImage: "https://images.unsplash.com/photo-1494412651409-8963ce7935a7?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.1.0",
     },
     coverage: {
       title: "Port Network",
@@ -586,7 +586,7 @@ export const WAREHOUSING_DIVISIONS: WarehousingDivisionData[] = [
         "Bonded, port-linked facilities equipped with customs-cleared bays, container yards, and 24/7 cargo operations.",
       items: [
         {
-          image: "https://picsum.photos/seed/bondedwarehouse/600/400",
+          image: "https://images.unsplash.com/photo-1622030411594-c282a63aa1bc?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           badge: { label: "250,000 SQFT", color: "green" },
           title: "Bonded Warehouse",
           features: ["Customs Bonded Storage", "8 Customs-Cleared Bays", "Direct Port Linkage"],
@@ -603,7 +603,7 @@ export const WAREHOUSING_DIVISIONS: WarehousingDivisionData[] = [
           },
         },
         {
-          image: "https://picsum.photos/seed/containerfreight/600/400",
+          image: "https://images.unsplash.com/photo-1557761469-f29c6e201784?q=80&w=3249&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           badge: { label: "CFS CERTIFIED", color: "blue" },
           title: "Container Freight Station",
           features: ["100,000 Sq Ft Container Yard", "De-Stuffing & Stuffing", "EXIM Documentation"],
@@ -620,7 +620,7 @@ export const WAREHOUSING_DIVISIONS: WarehousingDivisionData[] = [
           },
         },
         {
-          image: "https://picsum.photos/seed/exportdistribution/600/400",
+          image: "https://images.unsplash.com/photo-1694885169342-909981fb408a?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           badge: { label: "EXPORT READY", color: "amber" },
           title: "Export Distribution Hub",
           features: ["Dry & Bonded Storage", "Reefer Container Plugs", "24/7 Customs Desk"],
@@ -637,7 +637,7 @@ export const WAREHOUSING_DIVISIONS: WarehousingDivisionData[] = [
           },
         },
         {
-          image: "https://picsum.photos/seed/inlandcontainerdepot/600/400",
+          image: "https://images.unsplash.com/photo-1590247813693-5541d1c609fd?q=80&w=3309&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
           badge: { label: "ICD LINKED", color: "blue" },
           title: "Inland Container Depot",
           features: ["Rail-Linked ICD", "Empty Container Yard", "Customs Examination"],
