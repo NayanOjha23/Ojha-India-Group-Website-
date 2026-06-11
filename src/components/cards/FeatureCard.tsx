@@ -26,8 +26,11 @@ export function FeatureCard({
   return (
     <motion.div
       whileHover="hover"
+      variants={{ hover: { y: -4 } }}
+      initial={{ y: 0 }}
+      transition={{ duration: 0.25, ease: "easeOut" }}
       className={cn(
-        "group relative flex flex-col gap-4 rounded-sm p-6",
+        "group relative flex flex-col gap-4 overflow-hidden rounded-sm p-6",
         "border backdrop-blur-[12px] transition-colors duration-300",
         isGreen
           ? "border-emerald-500/15 hover:border-emerald-500/30"
@@ -40,6 +43,18 @@ export function FeatureCard({
           : "rgba(21,26,42,0.6)",
       }}
     >
+      {/* Glow orb — fades in on hover */}
+      <motion.div
+        variants={{ hover: { opacity: 1 } }}
+        initial={{ opacity: 0 }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
+        className={cn(
+          "pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full blur-3xl",
+          isGreen ? "bg-emerald-500/10" : "bg-primary/10"
+        )}
+        aria-hidden="true"
+      />
+
       {/* 4px left accent bar — slides in on hover */}
       <motion.div
         variants={{ hover: { opacity: 1, scaleY: 1 } }}
@@ -53,12 +68,16 @@ export function FeatureCard({
       />
 
       {/* Icon circle */}
-      <div className={cn(
-        "flex h-10 w-10 shrink-0 items-center justify-center rounded-full ring-1",
-        isGreen
-          ? "bg-emerald-500/15 ring-emerald-500/25"
-          : "bg-primary/15 ring-primary/25"
-      )}>
+      <motion.div
+        variants={{ hover: { scale: 1.08 } }}
+        transition={{ duration: 0.25, ease: "easeOut" }}
+        className={cn(
+          "relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full ring-1",
+          isGreen
+            ? "bg-emerald-500/15 ring-emerald-500/25"
+            : "bg-primary/15 ring-primary/25"
+        )}
+      >
         <span
           className={cn(
             "material-symbols-outlined text-[20px]",
@@ -69,7 +88,7 @@ export function FeatureCard({
         >
           {icon}
         </span>
-      </div>
+      </motion.div>
 
       {/* Text */}
       <div className="flex flex-col gap-2">
