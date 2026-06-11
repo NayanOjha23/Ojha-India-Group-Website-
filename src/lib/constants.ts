@@ -35,8 +35,8 @@ export const INDUSTRIES_DROPDOWN: IndustryItem[] = [
     description: "Asset-backed managed offices, pan-India",
   },
   {
-    label: "Real Estate",
-    href: "/real-estate",
+    label: "Commercial Spaces",
+    href: "/commercial-spaces",
     icon: "domain",
     description: "Grade-A commercial & retail developments",
   },
@@ -64,7 +64,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
     links: [
       { label: "Warehousing",    href: "/industries#warehousing" },
       { label: "Charter Spaces", href: "/industries#charter" },
-      { label: "Real Estate",    href: "/industries#real-estate" },
+      { label: "Commercial Spaces", href: "/industries#commercial-spaces" },
       { label: "Electronics",    href: "/industries#electronics" },
     ],
   },
@@ -86,7 +86,7 @@ export interface MapCompanyStat { label: string; value: string }
 export interface SubCompany {
   id: string;
   name: string;
-  industry: "Warehousing" | "Charter Spaces" | "Real Estate";
+  industry: "Warehousing" | "Charter Spaces" | "Commercial Spaces";
   href: string;
   ctaLabel: string;
   stats: MapCompanyStat[];
@@ -113,7 +113,7 @@ export interface MapLocation {
 export const INDUSTRY_COLORS: Record<SubCompany["industry"], string> = {
   "Warehousing":    "#2559f4",
   "Charter Spaces": "#f59e0b",
-  "Real Estate":    "#10b981",
+  "Commercial Spaces": "#10b981",
 };
 
 export const SUB_COMPANIES: SubCompany[] = [
@@ -129,6 +129,39 @@ export const SUB_COMPANIES: SubCompany[] = [
     ],
   },
   {
+    id: "ojha-cold-chain",
+    name: "Ojha Cold Chain",
+    industry: "Warehousing",
+    href: "/contact",
+    ctaLabel: "Enquire",
+    stats: [
+      { label: "Sq. Ft. Total", value: "1.4M" },
+      { label: "Active Hubs",   value: "7"    },
+    ],
+  },
+  {
+    id: "ojha-industrial-parks",
+    name: "Ojha Industrial Parks",
+    industry: "Warehousing",
+    href: "/contact",
+    ctaLabel: "Enquire",
+    stats: [
+      { label: "Sq. Ft. Total", value: "2.2M" },
+      { label: "Active Hubs",   value: "6"    },
+    ],
+  },
+  {
+    id: "ojha-port-logistics",
+    name: "Ojha Port Logistics",
+    industry: "Warehousing",
+    href: "/contact",
+    ctaLabel: "Enquire",
+    stats: [
+      { label: "Sq. Ft. Total", value: "1.1M" },
+      { label: "Active Hubs",   value: "4"    },
+    ],
+  },
+  {
     id: "charter-spaces",
     name: "Charter Spaces",
     industry: "Charter Spaces",
@@ -140,14 +173,36 @@ export const SUB_COMPANIES: SubCompany[] = [
     ],
   },
   {
-    id: "ojha-real-estate",
-    name: "Ojha Real Estate",
-    industry: "Real Estate",
-    href: "/real-estate",
+    id: "ojha-commercial-spaces",
+    name: "Ojha Commercial Spaces",
+    industry: "Commercial Spaces",
+    href: "/commercial-spaces",
     ctaLabel: "View Portfolio",
     stats: [
       { label: "Grade-A Assets", value: "6"   },
       { label: "Occupancy",      value: "96%" },
+    ],
+  },
+  {
+    id: "ojha-residential",
+    name: "Ojha Residential",
+    industry: "Commercial Spaces",
+    href: "/contact",
+    ctaLabel: "Enquire",
+    stats: [
+      { label: "Communities", value: "4"   },
+      { label: "Occupancy",   value: "92%" },
+    ],
+  },
+  {
+    id: "ojha-retail",
+    name: "Ojha Retail Spaces",
+    industry: "Commercial Spaces",
+    href: "/contact",
+    ctaLabel: "Enquire",
+    stats: [
+      { label: "Retail Centers", value: "3"   },
+      { label: "Occupancy",      value: "89%" },
     ],
   },
 ];
@@ -292,10 +347,10 @@ export const MAP_LOCATIONS: MapLocation[] = [
     ],
   },
 
-  // Ojha Real Estate
+  // Ojha Commercial Spaces
   {
-    id: "realestate-gurugram",
-    companyId: "ojha-real-estate",
+    id: "commercialspaces-gurugram",
+    companyId: "ojha-commercial-spaces",
     code: "RE-GGN-01",
     city: "Gurugram",
     state: "Haryana",
@@ -309,8 +364,8 @@ export const MAP_LOCATIONS: MapLocation[] = [
     ],
   },
   {
-    id: "realestate-mumbai",
-    companyId: "ojha-real-estate",
+    id: "commercialspaces-mumbai",
+    companyId: "ojha-commercial-spaces",
     code: "RE-MUM-02",
     city: "Mumbai (BKC)",
     state: "Maharashtra",
@@ -324,8 +379,8 @@ export const MAP_LOCATIONS: MapLocation[] = [
     ],
   },
   {
-    id: "realestate-bengaluru",
-    companyId: "ojha-real-estate",
+    id: "commercialspaces-bengaluru",
+    companyId: "ojha-commercial-spaces",
     code: "RE-BLR-03",
     city: "Bengaluru",
     state: "Karnataka",
@@ -336,6 +391,151 @@ export const MAP_LOCATIONS: MapLocation[] = [
       { icon: "apartment", label: "Office Spaces", value: "04" },
       { icon: "store",     label: "Retail Hubs",   value: "01" },
       { icon: "domain",    label: "Mixed-Use",     value: "01" },
+    ],
+  },
+
+  // Ojha Cold Chain
+  {
+    id: "coldchain-nagpur",
+    companyId: "ojha-cold-chain",
+    code: "CC-NAG-01",
+    city: "Nagpur",
+    state: "Maharashtra",
+    coordinates: [79.0882, 21.1458],
+    facilityType: "Cold Chain & Pharma Hub",
+    highlight: "Central India's largest pharma-grade cold storage hub",
+    infrastructure: [
+      { icon: "ac_unit",    label: "Cold Storage",         value: "180,000 sq ft" },
+      { icon: "medication", label: "Pharma-Grade Bays",    value: "10"            },
+      { icon: "thermostat", label: "Temp-Controlled Bays", value: "14"            },
+    ],
+  },
+  {
+    id: "coldchain-lucknow",
+    companyId: "ojha-cold-chain",
+    code: "CC-LKO-02",
+    city: "Lucknow",
+    state: "Uttar Pradesh",
+    coordinates: [80.9462, 26.8467],
+    facilityType: "Cold Storage & FMCG Hub",
+    highlight: "Serving North India's FMCG and dairy distribution network",
+    infrastructure: [
+      { icon: "ac_unit",        label: "Cold Storage",    value: "150,000 sq ft" },
+      { icon: "warehouse",      label: "Dry Storage",     value: "60,000 sq ft"  },
+      { icon: "local_shipping", label: "Cross-dock Bays", value: "10"            },
+    ],
+  },
+
+  // Ojha Industrial Parks
+  {
+    id: "industrialparks-chennai",
+    companyId: "ojha-industrial-parks",
+    code: "IP-CHE-01",
+    city: "Chennai",
+    state: "Tamil Nadu",
+    coordinates: [80.2707, 13.0827],
+    facilityType: "Industrial & Logistics Park",
+    highlight: "Auto-component and electronics manufacturing corridor access",
+    infrastructure: [
+      { icon: "factory",        label: "Built-up Area",   value: "650,000 sq ft" },
+      { icon: "groups",         label: "Multi-Client Bays", value: "14"          },
+      { icon: "local_shipping", label: "Loading Docks",   value: "22"            },
+    ],
+  },
+  {
+    id: "industrialparks-hyderabad",
+    companyId: "ojha-industrial-parks",
+    code: "IP-HYD-02",
+    city: "Hyderabad",
+    state: "Telangana",
+    coordinates: [78.4867, 17.3850],
+    facilityType: "Build-to-Suit Industrial Estate",
+    highlight: "Custom-engineered facilities for pharma and electronics manufacturers",
+    infrastructure: [
+      { icon: "engineering", label: "Built-up Area",   value: "500,000 sq ft" },
+      { icon: "bolt",        label: "Power Capacity",  value: "5 MVA"         },
+      { icon: "crop_free",   label: "Expansion Land",  value: "30 acres"      },
+    ],
+  },
+
+  // Ojha Port Logistics
+  {
+    id: "portlogistics-mundra",
+    companyId: "ojha-port-logistics",
+    code: "PL-MUN-01",
+    city: "Mundra",
+    state: "Gujarat",
+    coordinates: [69.7220, 22.8394],
+    facilityType: "Port-Linked Container Freight Station",
+    highlight: "Direct linkage to India's largest private port for import/export cargo",
+    infrastructure: [
+      { icon: "inventory_2",   label: "Bonded Storage",        value: "250,000 sq ft" },
+      { icon: "directions_boat", label: "Container Yard",      value: "100,000 sq ft" },
+      { icon: "local_shipping", label: "Customs-Cleared Bays", value: "08"            },
+    ],
+  },
+  {
+    id: "portlogistics-vizag",
+    companyId: "ojha-port-logistics",
+    code: "PL-VIZ-02",
+    city: "Visakhapatnam",
+    state: "Andhra Pradesh",
+    coordinates: [83.2185, 17.6868],
+    facilityType: "Port-Linked Warehousing",
+    highlight: "East coast gateway for export-oriented industrial cargo",
+    infrastructure: [
+      { icon: "inventory_2",     label: "Bonded Storage", value: "180,000 sq ft" },
+      { icon: "warehouse",       label: "Dry Storage",    value: "90,000 sq ft"  },
+      { icon: "directions_boat", label: "Container Yard", value: "40,000 sq ft"  },
+    ],
+  },
+
+  // Ojha Residential
+  {
+    id: "residential-indore",
+    companyId: "ojha-residential",
+    code: "RES-IND-01",
+    city: "Indore",
+    state: "Madhya Pradesh",
+    coordinates: [75.8577, 22.7196],
+    facilityType: "Residential Township",
+    highlight: "Integrated township with schools, retail, and green spaces",
+    infrastructure: [
+      { icon: "apartment", label: "Residential Units",    value: "1,200" },
+      { icon: "park",      label: "Green Cover",          value: "35%"   },
+      { icon: "groups",    label: "Community Amenities",  value: "12"    },
+    ],
+  },
+  {
+    id: "residential-jaipur",
+    companyId: "ojha-residential",
+    code: "RES-JAI-02",
+    city: "Jaipur",
+    state: "Rajasthan",
+    coordinates: [75.7873, 26.9124],
+    facilityType: "Residential Community",
+    highlight: "Premium villa and apartment community in a growing suburb",
+    infrastructure: [
+      { icon: "apartment", label: "Residential Units", value: "850" },
+      { icon: "villa",     label: "Villa Plots",       value: "120" },
+      { icon: "park",      label: "Green Cover",       value: "40%" },
+    ],
+  },
+
+  // Ojha Retail Spaces
+  {
+    id: "retail-ahmedabad",
+    companyId: "ojha-retail",
+    code: "RET-AMD-01",
+    city: "Ahmedabad",
+    state: "Gujarat",
+    coordinates: [72.5714, 23.0225],
+    facilityType: "Retail & High-Street Mall",
+    highlight: "Flagship high-street retail destination in West India",
+    infrastructure: [
+      { icon: "storefront",    label: "Retail Area",     value: "320,000 sq ft" },
+      { icon: "local_parking", label: "Parking Capacity", value: "800 cars"     },
+      { icon: "groups",        label: "Anchor Tenants",  value: "06"            },
     ],
   },
 ];

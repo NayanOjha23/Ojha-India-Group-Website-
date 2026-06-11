@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 const SERVICE_OPTIONS = [
   "Warehousing & Logistics",
   "Charter Spaces / Managed Office",
-  "Real Estate / Leasing",
+  "Commercial Spaces / Leasing",
   "Electronics",
   "General Partnership",
 ];

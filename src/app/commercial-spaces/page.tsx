@@ -13,14 +13,14 @@ import { FadeInSection }  from "@/components/ui/FadeInSection";
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "Premium Commercial Real Estate",
+  title: "Premium Commercial Spaces",
   description:
     "Developing India's skyline with Grade-A office spaces and high-traffic retail developments across the nation's most influential urban corridors.",
   openGraph: {
-    title: "Premium Commercial Real Estate | Ojha Group",
+    title: "Premium Commercial Spaces | Ojha Group",
     description:
       "Grade-A office spaces and high-traffic retail developments across India's most influential urban corridors.",
-    images: [{ url: "/og/real-estate.jpg", width: 1200, height: 630 }],
+    images: [{ url: "/og/commercial-spaces.jpg", width: 1200, height: 630 }],
   },
 };
 
@@ -33,7 +33,7 @@ const PORTFOLIO = [
     title: "Grade-A Offices",
     features: ["LEED Gold Certified", "Smart Building Integration", "High-Speed Elevators"],
     ctaLabel: "View Space",
-    href: "/real-estate#offices",
+    href: "/commercial-spaces#offices",
   },
   {
     image: "https://picsum.photos/seed/retailhub/600/400",
@@ -41,7 +41,7 @@ const PORTFOLIO = [
     title: "Retail Hubs",
     features: ["High-Street Advantage", "High-Footfall Zones", "Automated Parking"],
     ctaLabel: "View Space",
-    href: "/real-estate#retail",
+    href: "/commercial-spaces#retail",
   },
   {
     image: "https://picsum.photos/seed/mixeduse/600/400",
@@ -49,7 +49,7 @@ const PORTFOLIO = [
     title: "Mixed-Use",
     features: ["Integrated Living", "Premium Amenities", "24/7 Concierge"],
     ctaLabel: "View Space",
-    href: "/real-estate#mixed-use",
+    href: "/commercial-spaces#mixed-use",
   },
 ];
 
@@ -82,7 +82,7 @@ const KEY_PROJECTS = [
       "Fortune 500 tenants, large-floor plates",
     ],
     ctaLabel: "View Project",
-    href: "/real-estate/ojha-nexus",
+    href: "/commercial-spaces/ojha-nexus",
   },
   {
     image: "https://picsum.photos/seed/zenithplaza/800/500",
@@ -94,7 +94,7 @@ const KEY_PROJECTS = [
       "LEED certified, premium anchor floors",
     ],
     ctaLabel: "View Project",
-    href: "/real-estate/zenith-plaza",
+    href: "/commercial-spaces/zenith-plaza",
   },
 ];
 
@@ -120,7 +120,7 @@ const SERVICE_OPTIONS = [
 
 // ─── Page ────────────────────────────────────────────────────────────────────
 
-export default function RealEstatePage() {
+export default function CommercialSpacesPage() {
   return (
     <>
       {/* 1 — Hero */}
@@ -129,9 +129,9 @@ export default function RealEstatePage() {
         headline="Strategic Assets."
         highlightedWord="Prime Horizons."
         subtext="Developing India's skyline with Grade-A office spaces and high-traffic retail developments across the nation's most influential urban corridors."
-        primaryBtn={{ label: "View Portfolio",    href: "/real-estate#portfolio" }}
+        primaryBtn={{ label: "View Portfolio",    href: "/commercial-spaces#portfolio" }}
         ghostBtn={{ label: "Corporate Vision",    href: "/about#vision" }}
-        backgroundImage="https://picsum.photos/seed/realestatehero/1600/900"
+        backgroundImage="https://picsum.photos/seed/commercialspaceshero/1600/900"
       />
 
       {/* 2 — Asset Portfolio */}
@@ -193,7 +193,7 @@ export default function RealEstatePage() {
             subtitle="Grade-A commercial assets strategically located across India's key business districts."
             className="mb-10"
           />
-          <MapVisualization industries={["Real Estate"]} />
+          <MapVisualization industries={["Commercial Spaces"]} />
         </div>
       </FadeInSection>
 

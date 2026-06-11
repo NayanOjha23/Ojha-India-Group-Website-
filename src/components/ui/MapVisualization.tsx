@@ -20,7 +20,7 @@ import {
 
 const GEO_URL = "/india-states.json";
 
-const INDUSTRIES = SUB_COMPANIES.map((c) => c.industry);
+const INDUSTRIES = Array.from(new Set(SUB_COMPANIES.map((c) => c.industry)));
 
 function companyFor(location: MapLocation): SubCompany {
   return SUB_COMPANIES.find((c) => c.id === location.companyId)!;

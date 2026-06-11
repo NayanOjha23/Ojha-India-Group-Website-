@@ -15,11 +15,11 @@ import { InstitutionalExcellence } from "@/components/sections/InstitutionalExce
 export const metadata: Metadata = {
   title: "Ojha Group — Architects of Reliability",
   description:
-    "A multi-disciplinary conglomerate shaping the future of Warehousing, Managed Spaces, Real Estate, and Electronics since 1994.",
+    "A multi-disciplinary conglomerate shaping the future of Warehousing, Managed Spaces, Commercial Spaces, and Electronics since 1994.",
   openGraph: {
     title: "Ojha Group — Architects of Reliability",
     description:
-      "A multi-disciplinary conglomerate shaping the future of Warehousing, Managed Spaces, Real Estate, and Electronics since 1993.",
+      "A multi-disciplinary conglomerate shaping the future of Warehousing, Managed Spaces, Commercial Spaces, and Electronics since 1993.",
     images: [{ url: "/og/home.jpg", width: 1200, height: 630 }],
   },
 };
@@ -36,7 +36,7 @@ const STATS = [
 const VERTICALS = [
   { number: 1, title: "Warehousing",     description: "Grade-A logistics infrastructure with multi-modal connectivity spanning India's key industrial corridors.",         image: "https://images.unsplash.com/photo-1672552226380-486fe900b322?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",  href: "/warehousing"  },
   { number: 2, title: "Charter Spaces",  description: "Asset-backed managed offices delivering pricing stability and operational continuity for enterprise tenants.",        image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=2301&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",    href: "/charter-spaces"      },
-  { number: 3, title: "Commercial Spaces",     description: "Premium Grade-A commercial and retail developments in India's most influential urban corridors.",                    image: "https://images.unsplash.com/photo-1582407947304-fd86f028f716?q=80&w=3996&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", href: "/real-estate"  },
+  { number: 3, title: "Commercial Spaces",     description: "Premium Grade-A commercial and retail developments in India's most influential urban corridors.",                    image: "https://images.unsplash.com/photo-1582407947304-fd86f028f716?q=80&w=3996&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", href: "/commercial-spaces"  },
   { number: 4, title: "Electronics",     description: "Precision electronics manufacturing and distribution, powering next-generation industrial and consumer solutions.",   image: "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?q=80&w=3269&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",href: "/contact"  },
 ];
 
@@ -97,7 +97,7 @@ export default function HomePage() {
         badge="Signifying Excellence"
         headline="Architects of"
         highlightedWord="Reliability"
-        subtext="A multi-disciplinary conglomerate shaping the future of Warehousing, Managed Spaces, Real Estate, and Electronics since 1994."
+        subtext="A multi-disciplinary conglomerate shaping the future of Warehousing, Managed Spaces, Commercial Spaces, and Electronics since 1994."
         primaryBtn={{ label: "Explore Our Legacy", href: "/about" }}
         ghostBtn={{ label: "View Portfolio",       href: "/projects" }}
         backgroundImage="https://images.unsplash.com/photo-1462396240927-52058a6a84ec?q=80&w=2873&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"

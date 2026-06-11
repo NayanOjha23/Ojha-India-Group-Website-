@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: "%s | Ojha Group",
   },
   description:
-    "Ojha Group is a multi-disciplinary conglomerate shaping the future of Warehousing, Managed Spaces, Real Estate, and Electronics since 1994.",
+    "Ojha Group is a multi-disciplinary conglomerate shaping the future of Warehousing, Managed Spaces, Commercial Spaces, and Electronics since 1994.",
   openGraph: {
     siteName: "Ojha Group",
     type: "website",

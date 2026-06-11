@@ -7,7 +7,7 @@ import { FadeInSection } from "@/components/ui/FadeInSection";
 export const metadata: Metadata = {
   title: "Business Verticals",
   description:
-    "Ojha Group operates across four core industries — Warehousing & Logistics, Charter Spaces, Real Estate, and Electronics — delivering excellence since 1994.",
+    "Ojha Group operates across four core industries — Warehousing & Logistics, Charter Spaces, Commercial Spaces, and Electronics — delivering excellence since 1994.",
   openGraph: {
     title: "Business Verticals | Ojha Group",
     description:
@@ -46,12 +46,12 @@ const DIVISIONS = [
     ],
   },
   {
-    id: "real-estate",
+    id: "commercial-spaces",
     eyebrow: "Division 03",
-    title: "Real Estate",
+    title: "Commercial Spaces",
     description:
       "Developing India's skyline with LEED-certified Grade-A office towers and high-footfall retail hubs. Every square foot developed under the Ojha standard of architectural excellence and regulatory compliance.",
-    href: "/real-estate",
+    href: "/commercial-spaces",
     features: [
       { icon: "domain",       title: "Grade-A Offices",     description: "LEED Gold certified towers with smart building integration." },
       { icon: "storefront",   title: "Retail Hubs",         description: "High-street locations with automated parking and concierge." },
