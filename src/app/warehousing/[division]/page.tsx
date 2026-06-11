@@ -1,124 +1,60 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import Image from "next/image";
 import { HeroSection }   from "@/components/sections/HeroSection";
 import { SectionHeader } from "@/components/sections/SectionHeader";
-import { PropertyCard }  from "@/components/cards/PropertyCard";
+import { FacilityPortfolio } from "@/components/sections/FacilityPortfolio";
 import { MetricCard }    from "@/components/cards/MetricCard";
 import { EnquiryForm }   from "@/components/compound/EnquiryForm";
 import { FadeInSection } from "@/components/ui/FadeInSection";
+import { WAREHOUSING_DIVISIONS, getWarehousingDivision } from "@/lib/warehousing-divisions";
 
-// ─── Metadata ─────────────────────────────────────────────────────────────────
+interface PageProps {
+  params: Promise<{ division: string }>;
+}
 
-export const metadata: Metadata = {
-  title: "Regional Hub Operations",
-  description:
-    "Specialised warehousing solutions for West India's industrial heartlands. Delivering the global Ojha excellence through localised expertise.",
-  openGraph: {
-    title: "Regional Hub Operations | Ojha Group",
-    description:
-      "Specialised warehousing solutions for West India's industrial heartlands.",
-    images: [{ url: "/og/hub-operations.jpg", width: 1200, height: 630 }],
-  },
-};
+// ─── Static params + metadata ──────────────────────────────────────────────
 
-// ─── Data ────────────────────────────────────────────────────────────────────
+export function generateStaticParams() {
+  return WAREHOUSING_DIVISIONS.map((d) => ({ division: d.slug }));
+}
 
-const REGIONS = [
-  {
-    icon: "warehouse",
-    state: "Maharashtra",
-    description: "High-density storage solutions focusing on e-commerce and automotive support.",
-    cities: ["Bhiwandi", "Pune"],
-  },
-  {
-    icon: "factory",
-    state: "Gujarat",
-    description: "Proximity to heavy industries with chemical handling zones.",
-    cities: ["Anand", "Hazira"],
-  },
-  {
-    icon: "medication",
-    state: "Goa",
-    description: "Pharmaceutical grade facilities designed for cold chain logistics.",
-    cities: ["Verna"],
-  },
-  {
-    icon: "anchor",
-    state: "Coastal",
-    description: "Optimised for rapid turnaround from southern entry points.",
-    cities: ["Mangalore"],
-  },
-];
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { division: slug } = await params;
+  const division = getWarehousingDivision(slug);
+  if (!division) return {};
 
-const FACILITIES = [
-  {
-    image: "https://picsum.photos/seed/drymulti/600/400",
-    badge: { label: "800,000 SQFT", color: "green" as const },
-    title: "Dry Multi-Store",
-    features: ["12m Clear Height", "FM2 Flooring", "Automated MHE"],
-    ctaLabel: "Details",
-    href: "/hub-operations#dry",
-  },
-  {
-    image: "https://picsum.photos/seed/coldchainwest/600/400",
-    badge: { label: "AUTO-READY", color: "blue" as const },
-    title: "Cold Chain Hub",
-    features: ["Multi-temp Chambers", "24/7 Power Backup", "Pharma Grade"],
-    ctaLabel: "Details",
-    href: "/hub-operations#cold",
-  },
-  {
-    image: "https://picsum.photos/seed/indchem/600/400",
-    badge: { label: "PESO APPROVED", color: "amber" as const },
-    title: "Ind. & Chemical",
-    features: ["Fire Suppression", "Spill Containment", "HAZMAT Ready"],
-    ctaLabel: "Details",
-    href: "/hub-operations#chemical",
-  },
-];
-
-const STANDARDS = [
-  {
-    icon: "emergency",
-    title: "Zero-incident Code",
-    description: "Rigorous safety training and automated hazard detection.",
-  },
-  {
-    icon: "sensors",
-    title: "SmartHub 3.0",
-    description: "Real-time inventory visibility and API-first client integration.",
-  },
-];
-
-const METRICS = [
-  { value: "99.9", unit: "%",  label: "Accuracy"    },
-  { value: "24/7", unit: "",   label: "Monitoring"  },
-  { value: "15",   unit: "m",  label: "Turnaround"  },
-  { value: "100",  unit: "%",  label: "Compliance"  },
-];
-
-const SERVICE_OPTIONS = [
-  "General Dry Storage",
-  "Cold Chain / Refrigerated",
-  "Industrial & Chemical",
-  "Build-to-Suit",
-  "Multi-Region Contract",
-];
+  return {
+    title: division.metadata.title,
+    description: division.metadata.description,
+    openGraph: {
+      title: `${division.metadata.title} | Ojha Group`,
+      description: division.metadata.description,
+      images: [{ url: division.metadata.ogImage, width: 1200, height: 630 }],
+    },
+  };
+}
 
 // ─── Page ────────────────────────────────────────────────────────────────────
 
-export default function HubOperationsPage() {
+export default async function WarehousingDivisionPage({ params }: PageProps) {
+  const { division: slug } = await params;
+  const division = getWarehousingDivision(slug);
+  if (!division) notFound();
+
+  const { hero, coverage, facilities, standard, leadership } = division;
+
   return (
     <>
       {/* 1 — Hero */}
       <HeroSection
-        badge="West India Division"
-        headline="Regional Depth."
-        highlightedWord="Unified Standards."
-        subtext="Specialised warehousing solutions for West India's industrial heartlands. Delivering the global Ojha excellence through localised expertise."
-        primaryBtn={{ label: "View Regional Assets",  href: "/hub-operations#facilities" }}
-        ghostBtn={{ label: "Download Region Specs",   href: "/hub-operations/brochure" }}
-        backgroundImage="https://picsum.photos/seed/hubhero/1600/900"
+        badge={hero.badge}
+        headline={hero.headline}
+        highlightedWord={hero.highlightedWord}
+        subtext={hero.subtext}
+        primaryBtn={{ label: "View Facilities",       href: `/warehousing/${slug}#facilities` }}
+        ghostBtn={{ label: "Download Division Specs", href: `/warehousing/${slug}/brochure` }}
+        backgroundImage={hero.backgroundImage}
       />
 
       {/* 2 — Regional Coverage */}
@@ -126,15 +62,15 @@ export default function HubOperationsPage() {
         {/* Left-border accent heading style from screenshot */}
         <div className="border-l-[3px] border-primary pl-5 mb-10">
           <SectionHeader
-            title="Regional Coverage"
-            subtitle="Strategically located hubs across Maharashtra, Gujarat, and Goa ensuring seamless connectivity to major ports and industrial zones."
+            title={coverage.title}
+            subtitle={coverage.subtitle}
           />
         </div>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {REGIONS.map((r) => (
+        <div className={`grid grid-cols-1 gap-4 ${coverage.gridClassName}`}>
+          {coverage.regions.map((r) => (
             <div
-              key={r.state}
+              key={r.area}
               className="flex flex-col gap-4 rounded-sm border border-white/[0.06] bg-surface-dark p-5 transition-colors hover:border-white/[0.12]"
             >
               {/* Icon */}
@@ -148,9 +84,9 @@ export default function HubOperationsPage() {
                 </span>
               </div>
 
-              {/* State name + description */}
+              {/* Area name + description */}
               <div className="flex flex-col gap-1.5">
-                <h3 className="font-sans text-sm font-bold text-white">{r.state}</h3>
+                <h3 className="font-sans text-sm font-bold text-white">{r.area}</h3>
                 <p className="font-sans text-[12px] leading-relaxed text-muted">{r.description}</p>
               </div>
 
@@ -177,23 +113,13 @@ export default function HubOperationsPage() {
         delay={0.1}
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-10 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+          <div className="mb-10">
             <SectionHeader
               title="Facility Portfolio"
-              subtitle="Grade-A assets equipped with climate control, automated material handling, and integrated digital tracking."
+              subtitle={facilities.subtitle}
             />
-            <a
-              href="/warehousing"
-              className="shrink-0 font-sans text-[11px] font-semibold uppercase tracking-[0.14em] text-primary transition-colors hover:text-primary-glow"
-            >
-              View All Properties →
-            </a>
           </div>
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {FACILITIES.map((f) => (
-              <PropertyCard key={f.title} {...f} />
-            ))}
-          </div>
+          <FacilityPortfolio items={facilities.items} />
         </div>
       </FadeInSection>
 
@@ -205,19 +131,17 @@ export default function HubOperationsPage() {
             <div className="flex flex-col gap-7">
               <div>
                 <h2 className="font-sans text-4xl font-black uppercase leading-[0.92] tracking-tight text-white sm:text-5xl">
-                  The Ojha Standard:
+                  {standard.heading}
                   <br />
-                  <span className="text-primary">Unified Protocols.</span>
+                  <span className="text-primary">{standard.highlight}</span>
                 </h2>
                 <p className="mt-5 font-sans text-[13px] leading-relaxed text-muted max-w-md">
-                  We don't just store; we steward. Our operations are governed by a
-                  globally enforced quality matrix ensuring resilience, compliance,
-                  and real-time visibility.
+                  {standard.body}
                 </p>
               </div>
 
               <div className="flex flex-col gap-4">
-                {STANDARDS.map((s) => (
+                {standard.items.map((s) => (
                   <div key={s.title} className="flex items-start gap-3">
                     <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/20">
                       <span
@@ -239,7 +163,7 @@ export default function HubOperationsPage() {
 
             {/* Right: 2×2 MetricCard grid */}
             <div className="grid grid-cols-2 gap-4">
-              {METRICS.map((m) => (
+              {standard.metrics.map((m) => (
                 <MetricCard key={m.label} {...m} />
               ))}
             </div>
@@ -256,15 +180,15 @@ export default function HubOperationsPage() {
             <div className="flex flex-col gap-6">
               <SectionHeader
                 title="Local Leadership"
-                subtitle="Direct access to our West India team ensures rapid, decision-ready authority for your logistics challenges."
+                subtitle={leadership.subtitle}
               />
 
               {/* Person card */}
               <div className="flex items-start gap-5 rounded-sm border border-white/[0.06] bg-surface-dark p-5">
                 <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full ring-2 ring-primary/30">
                   <Image
-                    src="https://picsum.photos/seed/vikramrathore/200/200"
-                    alt="Vikram Rathore"
+                    src={`https://picsum.photos/seed/${leadership.person.imageSeed}/200/200`}
+                    alt={leadership.person.name}
                     fill
                     className="object-cover"
                     sizes="56px"
@@ -272,10 +196,10 @@ export default function HubOperationsPage() {
                 </div>
                 <div>
                   <p className="font-sans text-sm font-black uppercase tracking-[0.08em] text-white">
-                    Vikram Rathore
+                    {leadership.person.name}
                   </p>
                   <p className="mt-0.5 font-sans text-[11px] font-semibold uppercase tracking-[0.12em] text-muted">
-                    Operations Director, West
+                    {leadership.person.title}
                   </p>
                 </div>
               </div>
@@ -283,18 +207,21 @@ export default function HubOperationsPage() {
               {/* Regional HQ */}
               <div className="flex flex-col gap-2 rounded-sm border border-white/[0.06] bg-surface-dark p-5">
                 <p className="font-sans text-[11px] font-black uppercase tracking-[0.14em] text-white">
-                  Regional HQ
+                  {leadership.hq.name}
                 </p>
                 <p className="font-sans text-[12px] leading-relaxed text-muted">
-                  Ojha Logistics West Tower<br />
-                  Plot No. J8, MIDC Industrial Area<br />
-                  Navi Mumbai, MH 400701
+                  {leadership.hq.addressLines.map((line, i) => (
+                    <span key={line}>
+                      {line}
+                      {i < leadership.hq.addressLines.length - 1 && <br />}
+                    </span>
+                  ))}
                 </p>
                 <a
-                  href="tel:+912245678900"
+                  href={`tel:${leadership.hq.phone.replace(/\s+/g, "")}`}
                   className="mt-1 font-sans text-[12px] text-primary transition-colors hover:text-primary-glow"
                 >
-                  +91 22 4567 8900
+                  {leadership.hq.phone}
                 </a>
               </div>
             </div>
@@ -305,7 +232,7 @@ export default function HubOperationsPage() {
                 Direct Enquiry
               </p>
               <EnquiryForm
-                serviceOptions={SERVICE_OPTIONS}
+                serviceOptions={leadership.serviceOptions}
                 formspreeId="YOUR_FORMSPREE_ID"
                 variant="underline"
               />

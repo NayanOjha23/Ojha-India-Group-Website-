@@ -121,7 +121,7 @@ export const SUB_COMPANIES: SubCompany[] = [
     id: "ojha-logistics",
     name: "Ojha Logistics",
     industry: "Warehousing",
-    href: "/hub-operations",
+    href: "/warehousing/logistics",
     ctaLabel: "View Regional Operations",
     stats: [
       { label: "Sq. Ft. Total", value: "6.0M" },
@@ -132,8 +132,8 @@ export const SUB_COMPANIES: SubCompany[] = [
     id: "ojha-cold-chain",
     name: "Ojha Cold Chain",
     industry: "Warehousing",
-    href: "/contact",
-    ctaLabel: "Enquire",
+    href: "/warehousing/cold-chain",
+    ctaLabel: "View Cold Chain Network",
     stats: [
       { label: "Sq. Ft. Total", value: "1.4M" },
       { label: "Active Hubs",   value: "7"    },
@@ -143,8 +143,8 @@ export const SUB_COMPANIES: SubCompany[] = [
     id: "ojha-industrial-parks",
     name: "Ojha Industrial Parks",
     industry: "Warehousing",
-    href: "/contact",
-    ctaLabel: "Enquire",
+    href: "/warehousing/industrial-parks",
+    ctaLabel: "View Industrial Parks",
     stats: [
       { label: "Sq. Ft. Total", value: "2.2M" },
       { label: "Active Hubs",   value: "6"    },
@@ -154,8 +154,8 @@ export const SUB_COMPANIES: SubCompany[] = [
     id: "ojha-port-logistics",
     name: "Ojha Port Logistics",
     industry: "Warehousing",
-    href: "/contact",
-    ctaLabel: "Enquire",
+    href: "/warehousing/port-logistics",
+    ctaLabel: "View Port Operations",
     stats: [
       { label: "Sq. Ft. Total", value: "1.1M" },
       { label: "Active Hubs",   value: "4"    },

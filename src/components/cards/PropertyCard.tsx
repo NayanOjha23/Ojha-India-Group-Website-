@@ -11,8 +11,13 @@ interface PropertyCardProps {
   title: string;
   features: string[];
   ctaLabel?: string;
-  href: string;
+  href?: string;
   className?: string;
+  details?: {
+    description: string;
+    specs: { label: string; value: string }[];
+    amenities: string[];
+  };
 }
 
 const badgeColors = {
@@ -29,16 +34,18 @@ export function PropertyCard({
   ctaLabel = "Details",
   href,
   className,
+  details,
 }: PropertyCardProps) {
   const badgeStyle = badgeColors[badge?.color ?? "blue"];
 
   return (
     <motion.div
       whileHover="hover"
+      tabIndex={details ? 0 : undefined}
       className={cn(
-        "group flex flex-col overflow-hidden rounded-sm",
+        "group relative flex flex-col overflow-hidden rounded-sm",
         "border border-white/[0.06] bg-surface-dark",
-        "transition-colors duration-300 hover:border-white/10",
+        "transition-colors duration-300 hover:border-white/10 focus-within:outline-none",
         className
       )}
     >
@@ -94,18 +101,64 @@ export function PropertyCard({
         </ul>
 
         {/* Separator */}
-        <div className="mt-auto pt-3 border-t border-white/[0.06]">
-          <Link
-            href={href}
-            className="inline-flex items-center gap-1 font-sans text-[11px] font-semibold uppercase tracking-[0.14em] text-primary transition-colors hover:text-primary-glow"
-          >
-            {ctaLabel}
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-              <path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </Link>
-        </div>
+        {href && (
+          <div className="mt-auto pt-3 border-t border-white/[0.06]">
+            <Link
+              href={href}
+              className="inline-flex items-center gap-1 font-sans text-[11px] font-semibold uppercase tracking-[0.14em] text-primary transition-colors hover:text-primary-glow"
+            >
+              {ctaLabel}
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </Link>
+          </div>
+        )}
       </div>
+
+      {/* ── Hover detail panel ───────────────────────────── */}
+      {details && (
+        <div
+          className={cn(
+            "invisible absolute inset-0 z-10 flex translate-y-1 flex-col justify-between gap-3 overflow-hidden rounded-sm p-5 opacity-0",
+            "border border-primary/20 bg-surface-dark/95 backdrop-blur-[12px]",
+            "transition-all duration-300",
+            "group-hover:visible group-hover:translate-y-0 group-hover:opacity-100",
+            "group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100"
+          )}
+        >
+          <div className="flex flex-col gap-2">
+            <h3 className="font-sans text-sm font-black uppercase tracking-[0.1em] text-white">
+              {title}
+            </h3>
+            <p className="font-sans text-[12px] leading-relaxed text-muted">
+              {details.description}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 gap-x-3 gap-y-2.5">
+            {details.specs.map((s) => (
+              <div key={s.label}>
+                <p className="font-sans text-[9px] font-semibold uppercase tracking-[0.16em] text-muted/70">
+                  {s.label}
+                </p>
+                <p className="font-sans text-[12px] font-bold text-white">{s.value}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex flex-wrap gap-1.5">
+            {details.amenities.map((a) => (
+              <span
+                key={a}
+                className="rounded-sm border border-white/10 px-2 py-0.5 font-sans text-[10px] font-semibold uppercase tracking-[0.14em] text-muted/70"
+              >
+                {a}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
     </motion.div>
   );
 }

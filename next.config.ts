@@ -19,6 +19,16 @@ const nextConfig: NextConfig = {
         destination: "/commercial-spaces/:path*",
         permanent: true,
       },
+      {
+        source: "/hub-operations",
+        destination: "/warehousing/logistics",
+        permanent: true,
+      },
+      {
+        source: "/hub-operations/:path*",
+        destination: "/warehousing/logistics/:path*",
+        permanent: true,
+      },
     ];
   },
 };
