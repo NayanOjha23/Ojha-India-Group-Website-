@@ -1,17 +1,35 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PropertyCard } from "@/components/cards/PropertyCard";
+import { cn } from "@/lib/utils";
 import type { DivisionFacility } from "@/lib/warehousing-divisions";
 
 interface FacilityPortfolioProps {
   items: DivisionFacility[];
 }
 
-export function FacilityPortfolio({ items }: FacilityPortfolioProps) {
-  const trackRef = useRef<HTMLDivElement>(null);
+const SPOTLIGHT_COUNT = 3;
+const CARD_WIDTH = 30; // % of track width
+const PEEK = 5; // % of track width visible as a blurred peek on each edge
+const AUTO_SCROLL_MS = 5000;
 
-  if (items.length <= 3) {
+export function FacilityPortfolio({ items }: FacilityPortfolioProps) {
+  const isCarousel = items.length > SPOTLIGHT_COUNT;
+  const maxIndex = Math.max(0, items.length - SPOTLIGHT_COUNT);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const pausedRef = useRef(false);
+
+  useEffect(() => {
+    if (!isCarousel) return;
+    const interval = setInterval(() => {
+      if (pausedRef.current) return;
+      setActiveIndex((i) => (i + 1) % (maxIndex + 1));
+    }, AUTO_SCROLL_MS);
+    return () => clearInterval(interval);
+  }, [isCarousel, maxIndex]);
+
+  if (!isCarousel) {
     return (
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((f) => (
@@ -21,36 +39,46 @@ export function FacilityPortfolio({ items }: FacilityPortfolioProps) {
     );
   }
 
-  const scroll = (direction: "left" | "right") => {
-    const track = trackRef.current;
-    if (!track) return;
-    const card = track.querySelector<HTMLElement>("[data-carousel-card]");
-    const amount = card ? card.offsetWidth + 20 : track.clientWidth * 0.85;
-    track.scrollBy({ left: direction === "left" ? -amount : amount, behavior: "smooth" });
+  const goTo = (index: number) => {
+    const span = maxIndex + 1;
+    setActiveIndex(((index % span) + span) % span);
   };
 
   return (
-    <div>
-      <div
-        ref={trackRef}
-        className="flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-      >
-        {items.map((f) => (
-          <div
-            key={f.title}
-            data-carousel-card
-            className="w-[85%] shrink-0 snap-start sm:w-[46%] lg:w-[32%]"
-          >
-            <PropertyCard {...f} className="h-full" />
-          </div>
-        ))}
+    <div
+      onMouseEnter={() => { pausedRef.current = true; }}
+      onMouseLeave={() => { pausedRef.current = false; }}
+    >
+      <div className="overflow-hidden">
+        <div
+          className="flex transition-transform duration-700 ease-out"
+          style={{ transform: `translateX(calc(${PEEK}% - ${activeIndex * CARD_WIDTH}%))` }}
+        >
+          {items.map((f, i) => {
+            const isSpotlight = i >= activeIndex && i < activeIndex + SPOTLIGHT_COUNT;
+            return (
+              <div key={f.title} className="shrink-0 px-2.5" style={{ width: `${CARD_WIDTH}%` }}>
+                <div
+                  className={cn(
+                    "transition-all duration-700 ease-out",
+                    isSpotlight
+                      ? "scale-100 opacity-100 blur-none"
+                      : "scale-[0.96] opacity-40 blur-[2px]"
+                  )}
+                >
+                  <PropertyCard {...f} className="h-full" />
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
-      {/* Carousel nav */}
-      <div className="mt-4 flex justify-end gap-2">
+      {/* Controls */}
+      <div className="mt-6 flex items-center justify-center gap-5">
         <button
           type="button"
-          onClick={() => scroll("left")}
+          onClick={() => goTo(activeIndex - 1)}
           aria-label="Previous facilities"
           className="flex h-9 w-9 items-center justify-center rounded-sm border border-white/[0.06] bg-surface-dark text-white transition-colors hover:border-primary/30 hover:text-primary"
         >
@@ -58,9 +86,25 @@ export function FacilityPortfolio({ items }: FacilityPortfolioProps) {
             <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
+
+        <div className="flex items-center gap-2">
+          {Array.from({ length: maxIndex + 1 }).map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => goTo(i)}
+              aria-label={`Go to slide ${i + 1}`}
+              className={cn(
+                "h-1.5 rounded-full transition-all duration-300",
+                i === activeIndex ? "w-6 bg-primary" : "w-1.5 bg-white/20"
+              )}
+            />
+          ))}
+        </div>
+
         <button
           type="button"
-          onClick={() => scroll("right")}
+          onClick={() => goTo(activeIndex + 1)}
           aria-label="Next facilities"
           className="flex h-9 w-9 items-center justify-center rounded-sm border border-white/[0.06] bg-surface-dark text-white transition-colors hover:border-primary/30 hover:text-primary"
         >
